@@ -11,5 +11,9 @@ namespace Events
     /// </summary>
     public enum EventType
     {
+        /// <summary>
+        /// Defines a ModelA related event
+        /// </summary>
+        ModelA,
     }
 }

@@ -13,7 +13,7 @@ namespace DomainModel.Abstraction
     /// </summary>
     /// <typeparam name="T">Type of items to store</typeparam>
     class Repository<T> : IRepository<T>
-        where T : IEntity
+        where T : IEntity, IEvent
     {
         private readonly IMediator _mediator;
 
@@ -24,7 +24,7 @@ namespace DomainModel.Abstraction
 
         public async Task AddOrUpdate(T item)
         {
-            await _mediator.Publish(new AddOrUpdateNotification()).ConfigureAwait(false);
+            await _mediator.Publish(new AddOrUpdateNotification<T>(item)).ConfigureAwait(false);
         }
 
 

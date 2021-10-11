@@ -21,6 +21,6 @@ namespace Events
         /// </summary>
         /// <param name="coder">coder for serialization</param>
         /// <returns>byte representation</returns>
-        public byte[] Serilize(ICoder coder);
+        public byte[] Serialize(ICoder coder);
     }
 }

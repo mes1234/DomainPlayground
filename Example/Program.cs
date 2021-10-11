@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Autofac;
 using DomainModel.A;
 using DomainModel.Abstraction;
+using EventsDispatcher;
 
 namespace Example
 {
@@ -13,6 +14,7 @@ namespace Example
 
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyModules(typeof(ModelAbstractionModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(EventsDispatcherModule).Assembly);
             builder.RegisterType<Worker>();
             var worker = builder.Build().Resolve<Worker>();
 
@@ -35,7 +37,7 @@ namespace Example
             var m1 = new ModelA();
             await _repository.AddOrUpdate(m1);
 
-            var m2 = await _repository.Get(m1.Id);
+            //var m2 = await _repository.Get(m1.Id);
         }
     }
 }

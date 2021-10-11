@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Domain.Events\Events\Events.csproj" />
 	  <ProjectReference Include="..\DomainModel.Abstraction\DomainModel.Abstraction.csproj" />
 	</ItemGroup>
 
