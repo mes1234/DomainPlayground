@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DomainModel.Abstraction
+namespace Shared
 {
     /// <summary>
     /// Entity is an object identified by its Id

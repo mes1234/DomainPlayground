@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Events
+namespace Shared
 {
     /// <summary>
     /// Domain event
@@ -14,7 +14,12 @@ namespace Events
         /// <summary>
         /// Gets defintion of type of event
         /// </summary>
-        public EventType Type { get; }
+        public ContentTypes Type { get; }
+
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        public Guid Id { get; }
 
         /// <summary>
         /// Obtain serialized version of given event

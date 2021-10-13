@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Events;
 using MediatR;
+using Shared;
 
 namespace DomainModel.Abstraction
 {

@@ -10,13 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		rules.ruleset = rules.ruleset
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{FBC4D634-D960-4DB8-8FDE-51C27BD10702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{FBC4D634-D960-4DB8-8FDE-51C27BD10702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsDispatcher", "EventsDispatcher\EventsDispatcher.csproj", "{6738B14D-12CF-4A22-AA46-2A35C3A70D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsDispatcher", "EventsDispatcher\EventsDispatcher.csproj", "{6738B14D-12CF-4A22-AA46-2A35C3A70D95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel.A", "DomainModel.A\DomainModel.A.csproj", "{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.A", "DomainModel.A\DomainModel.A.csproj", "{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel.Abstraction", "DomainModel.Abstraction\DomainModel.Abstraction.csproj", "{BA101A81-361B-414C-B30A-75A9DDF13BBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Abstraction", "DomainModel.Abstraction\DomainModel.Abstraction.csproj", "{BA101A81-361B-414C-B30A-75A9DDF13BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{7DF6011B-2A5E-4101-956C-8D44C50B51CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

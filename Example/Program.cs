@@ -4,6 +4,7 @@ using Autofac;
 using DomainModel.A;
 using DomainModel.Abstraction;
 using EventsDispatcher;
+using Shared;
 
 namespace Example
 {
@@ -15,6 +16,7 @@ namespace Example
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyModules(typeof(ModelAbstractionModule).Assembly);
             builder.RegisterAssemblyModules(typeof(EventsDispatcherModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(SharedModule).Assembly);
             builder.RegisterType<Worker>();
             var worker = builder.Build().Resolve<Worker>();
 

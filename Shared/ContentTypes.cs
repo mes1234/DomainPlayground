@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Events
+namespace Shared
 {
     /// <summary>
-    /// Supported event types
+    /// Supported event types.
     /// </summary>
-    public enum EventType
+    public enum ContentTypes
     {
         /// <summary>
         /// Defines a ModelA related event

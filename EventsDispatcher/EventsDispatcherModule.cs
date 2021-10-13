@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Events;
+using MediatR;
 
 namespace EventsDispatcher
 {
@@ -15,10 +17,11 @@ namespace EventsDispatcher
         /// <summary>
         /// Load items to DI container
         /// </summary>
-        /// <param name="builder"></param>
+        /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(AddOrUpdateItemNotificationHandler<>)).AsImplementedInterfaces();
+            builder.RegisterType<StoreEventNotificationHandler>().As<INotificationHandler<StoreEventNotification>>();
         }
     }
 }

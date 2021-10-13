@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace DomainModel.Abstraction
+namespace Events
 {
     /// <summary>
-    /// Request for item
+    /// Notify about removal
     /// </summary>
-    public class GetRequest : IRequest<IEntity>
+    public class RemoveNotification : INotification
     {
         private readonly Guid _id;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="RemoveNotification"/> class.
         /// </summary>
-        /// <param name="id"></param>
-        public GetRequest(Guid id)
+        /// <param name="id">id</param>
+        public RemoveNotification(Guid id)
         {
             _id = id;
         }
