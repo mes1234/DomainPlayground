@@ -18,5 +18,13 @@ namespace DomainModel.A
         {
             _id = Guid.NewGuid();
         }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; init; }
     }
 }

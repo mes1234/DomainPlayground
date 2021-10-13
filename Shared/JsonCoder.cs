@@ -12,11 +12,16 @@ namespace Shared
     public class JsonCoder : ICoder
     {
         /// <inheritdoc/>
-        public byte[] GetBytes(object obj)
+        public byte[] Encode(object obj)
         {
-            if (obj is IEntity entity)
+            if (obj is Guid id)
             {
-                return entity.Id.ToByteArray();
+                return id.ToByteArray();
+            }
+
+            if (obj is string text)
+            {
+                return Encoding.UTF8.GetBytes(text);
             }
 
             throw new NotImplementedException();

@@ -36,7 +36,10 @@ namespace Example
 
         public async Task Run()
         {
-            var m1 = new ModelA();
+            var m1 = new ModelA
+            {
+                Name = "Art",
+            };
             await _repository.AddOrUpdate(m1);
 
             //var m2 = await _repository.Get(m1.Id);

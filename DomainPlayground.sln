@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.A", "DomainMode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Abstraction", "DomainModel.Abstraction\DomainModel.Abstraction.csproj", "{BA101A81-361B-414C-B30A-75A9DDF13BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{7DF6011B-2A5E-4101-956C-8D44C50B51CE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,10 +44,6 @@ Global
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DF6011B-2A5E-4101-956C-8D44C50B51CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

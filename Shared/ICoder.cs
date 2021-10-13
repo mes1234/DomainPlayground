@@ -16,6 +16,6 @@ namespace Shared
         /// </summary>
         /// <param name="obj">object to transform</param>
         /// <returns>bytes.</returns>
-        public byte[] GetBytes(object obj);
+        public byte[] Encode(object obj);
     }
 }

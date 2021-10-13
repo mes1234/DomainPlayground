@@ -18,7 +18,8 @@ namespace DomainModel.A
         /// <inheritdoc/>
         public byte[] Serialize(ICoder coder)
         {
-            return coder.GetBytes(this);
+            _ = coder.Encode(Id);
+            return coder.Encode(Name);
         }
     }
 }
