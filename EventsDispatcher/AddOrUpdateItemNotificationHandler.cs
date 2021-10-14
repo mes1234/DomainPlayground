@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Events;
+using Doomain.Events;
+using Doomain.Shared;
 using MediatR;
-using Shared;
 
-namespace EventsDispatcher
+namespace Doomain.EventsDispatcher
 {
     /// <summary>
     ///   <br />
@@ -14,17 +14,14 @@ namespace EventsDispatcher
     public class AddOrUpdateItemNotificationHandler<T> : INotificationHandler<AddOrUpdateNotification<T>>
         where T : IEvent
     {
-        private readonly ICoder _coder;
         private readonly IMediator _mediator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler{T}"/> class.
         /// </summary>
-        /// <param name="coder">coder</param>
         /// <param name="mediator">mediator</param>
-        public AddOrUpdateItemNotificationHandler(ICoder coder, IMediator mediator)
+        public AddOrUpdateItemNotificationHandler(IMediator mediator)
         {
-            _coder = coder;
             _mediator = mediator;
         }
 
@@ -41,7 +38,7 @@ namespace EventsDispatcher
 
             await _mediator.Publish(new StoreEventNotification
             {
-                Content = item.Serialize(_coder),
+                Content = item.Serialize(),
                 ContentType = item.Type,
                 EventType = EventTypes.AddedOrUpdated,
                 Id = item.Id,

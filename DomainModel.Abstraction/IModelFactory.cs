@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Doomain.Shared
+namespace Doomain.Abstraction
 {
     /// <summary>
-    /// Supported event types.
+    /// 
     /// </summary>
-    public enum ContentTypes
+    public interface IModelFactory
     {
         /// <summary>
-        /// Defines a ModelA related event
+        /// Creates this instance.
         /// </summary>
-        ModelA,
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T Create<T>();
     }
 }

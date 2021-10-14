@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events", "Domain.Events\Events\Events.csproj", "{5DD82EDE-3CA9-42D5-890C-AA1C9B79F90B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Events", "Domain.Events\Events\Doomain.Events.csproj", "{5DD82EDE-3CA9-42D5-890C-AA1C9B79F90B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{338C9665-0B41-4745-9AC3-CAF17ACE6925}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,11 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{FBC4D634-D960-4DB8-8FDE-51C27BD10702}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsDispatcher", "EventsDispatcher\EventsDispatcher.csproj", "{6738B14D-12CF-4A22-AA46-2A35C3A70D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.EventsDispatcher", "EventsDispatcher\Doomain.EventsDispatcher.csproj", "{6738B14D-12CF-4A22-AA46-2A35C3A70D95}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.A", "DomainModel.A\DomainModel.A.csproj", "{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Abstraction", "DomainModel.Abstraction\Doomain.Abstraction.csproj", "{BA101A81-361B-414C-B30A-75A9DDF13BBC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Abstraction", "DomainModel.Abstraction\DomainModel.Abstraction.csproj", "{BA101A81-361B-414C-B30A-75A9DDF13BBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Shared", "Shared\Doomain.Shared.csproj", "{B1FDA2EC-46DA-4536-85A6-0C31BAE80F99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +36,14 @@ Global
 		{6738B14D-12CF-4A22-AA46-2A35C3A70D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6738B14D-12CF-4A22-AA46-2A35C3A70D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6738B14D-12CF-4A22-AA46-2A35C3A70D95}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF6C4990-66DB-4DA0-BD5A-AFC16345D21C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA101A81-361B-414C-B30A-75A9DDF13BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1FDA2EC-46DA-4536-85A6-0C31BAE80F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1FDA2EC-46DA-4536-85A6-0C31BAE80F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1FDA2EC-46DA-4536-85A6-0C31BAE80F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1FDA2EC-46DA-4536-85A6-0C31BAE80F99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared
+namespace Doomain.Shared
 {
     /// <summary>
     /// Domain event
@@ -24,8 +24,7 @@ namespace Shared
         /// <summary>
         /// Obtain serialized version of given event
         /// </summary>
-        /// <param name="coder">coder for serialization</param>
         /// <returns>byte representation</returns>
-        public byte[] Serialize(ICoder coder);
+        public byte[] Serialize();
     }
 }

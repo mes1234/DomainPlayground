@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 
-namespace Shared
+namespace Doomain.Shared
 {
     /// <summary>
     /// Registration of shared modules

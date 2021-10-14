@@ -1,8 +1,6 @@
 ﻿using System;
-using DomainModel.Abstraction;
-using Events;
 
-namespace DomainModel.A
+namespace Example
 {
     /// <summary>
     /// Some model of A

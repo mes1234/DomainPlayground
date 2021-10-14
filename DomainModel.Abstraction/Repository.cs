@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Events;
+using Doomain.Events;
+using Doomain.Shared;
 using MediatR;
-using Shared;
 
-namespace DomainModel.Abstraction
+namespace Doomain.Abstraction
 {
     /// <summary>
     /// Generic repository 

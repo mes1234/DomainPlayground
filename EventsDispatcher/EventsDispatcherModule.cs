@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using Events;
+using Doomain.Events;
 using MediatR;
 
-namespace EventsDispatcher
+namespace Doomain.EventsDispatcher
 {
     /// <summary>
     /// Registration of Abstraction modules

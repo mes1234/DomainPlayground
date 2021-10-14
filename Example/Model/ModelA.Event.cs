@@ -1,9 +1,9 @@
 ﻿using System;
-using DomainModel.Abstraction;
-using Events;
-using Shared;
+using Doomain.Abstraction;
+using Doomain.Shared;
+using Doomain.Events;
 
-namespace DomainModel.A
+namespace Example
 {
     /// <summary>
     /// Some model of A
@@ -16,10 +16,10 @@ namespace DomainModel.A
 
 
         /// <inheritdoc/>
-        public byte[] Serialize(ICoder coder)
+        public byte[] Serialize()
         {
-            _ = coder.Encode(Id);
-            return coder.Encode(Name);
+            _ = _coder.Encode(Id);
+            return _coder.Encode(Name);
         }
     }
 }

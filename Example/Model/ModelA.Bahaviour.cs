@@ -1,22 +1,22 @@
 ﻿using System;
-using DomainModel.Abstraction;
-using Events;
-using Shared;
+using Doomain.Shared;
 
-namespace DomainModel.A
+namespace Example
 {
     /// <summary>
     /// Some model of A
     /// </summary>
     public partial class ModelA : IEntity, IEvent
     {
+        private readonly ICoder _coder;
 
         /// <summary>
         /// Create instance of ModelA
         /// </summary>
-        public ModelA()
+        public ModelA(ICoder coder)
         {
             _id = Guid.NewGuid();
+            _coder = coder;
         }
 
         /// <summary>
@@ -25,6 +25,11 @@ namespace DomainModel.A
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; init; }
+        public string Name { get; private set; }
+
+        public void SetName(string name)
+        {
+            Name = name;
+        }
     }
 }

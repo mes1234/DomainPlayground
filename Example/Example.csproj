@@ -10,10 +10,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Domain.Events\Events\Events.csproj" />
-		<ProjectReference Include="..\DomainModel.Abstraction\DomainModel.Abstraction.csproj" />
-		<ProjectReference Include="..\DomainModel.A\DomainModel.A.csproj" />
-		<ProjectReference Include="..\EventsDispatcher\EventsDispatcher.csproj" />
+		<ProjectReference Include="..\Domain.Events\Events\Doomain.Events.csproj" />
+		<ProjectReference Include="..\DomainModel.Abstraction\Doomain.Abstraction.csproj" />
+		<ProjectReference Include="..\EventsDispatcher\Doomain.EventsDispatcher.csproj" />
+		<ProjectReference Include="..\Shared\Doomain.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

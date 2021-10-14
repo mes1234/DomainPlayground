@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared
+namespace Doomain.Shared
 {
     /// <summary>
     /// Interface used to encode/decode.

@@ -13,6 +13,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Domain.Events\Events\Events.csproj" />
 	  <ProjectReference Include="..\DomainModel.Abstraction\DomainModel.Abstraction.csproj" />
+	  <ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
 
 </Project>

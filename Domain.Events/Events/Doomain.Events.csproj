@@ -6,12 +6,11 @@
 		<Description>C# client for Locker</Description>
 		<LangVersion>9.0</LangVersion>
 		<Authors>github.com\mes1234</Authors>
-		<CodeAnalysisRuleSet>..\rules.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet>..\..\rules.ruleset</CodeAnalysisRuleSet>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Autofac" Version="6.3.0" />
 		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="Serilog" Version="2.10.0" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
@@ -21,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Domain.Events\Events\Events.csproj" />
+	  <ProjectReference Include="..\..\Shared\Doomain.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

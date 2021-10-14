@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shared;
+using Doomain.Shared;
 
-namespace DomainModel.Abstraction
+namespace Doomain.Abstraction
 {
     /// <summary>
     /// Repository allow to access Entities

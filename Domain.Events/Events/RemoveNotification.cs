@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Events
+namespace Doomain.Events
 {
     /// <summary>
     /// Notify about removal

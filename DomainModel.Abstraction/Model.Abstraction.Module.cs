@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection;
 
-namespace DomainModel.Abstraction
+namespace Doomain.Abstraction
 {
     /// <summary>
     /// Registration of Abstraction modules
@@ -21,6 +21,7 @@ namespace DomainModel.Abstraction
         {
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
             builder.RegisterMediatR(typeof(ModelAbstractionModule).Assembly);
+            builder.RegisterType<ModelFactory>().As<IModelFactory>();
         }
     }
 }

@@ -17,7 +17,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Domain.Events\Events\Events.csproj" />
+		<ProjectReference Include="..\Domain.Events\Events\Doomain.Events.csproj" />
+		<ProjectReference Include="..\Shared\Doomain.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

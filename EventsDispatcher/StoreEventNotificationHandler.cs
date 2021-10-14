@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Events;
+using Doomain.Events;
+using Doomain.Shared;
 using MediatR;
-using Shared;
 
-namespace EventsDispatcher
+namespace Doomain.EventsDispatcher
 {
     /// <summary>
     ///   <br />
     /// </summary>
     public class StoreEventNotificationHandler : INotificationHandler<StoreEventNotification>
     {
-
         /// <summary>Handles a notification</summary>
         /// <param name="notification">The notification</param>
         /// <param name="cancellationToken">Cancellation token</param>

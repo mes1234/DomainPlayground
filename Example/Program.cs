@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Autofac;
-using DomainModel.A;
-using DomainModel.Abstraction;
-using EventsDispatcher;
-using Shared;
+using Doomain.Abstraction;
+using Doomain.EventsDispatcher;
+using Doomain.Shared;
 
 namespace Example
 {
@@ -18,6 +17,7 @@ namespace Example
             builder.RegisterAssemblyModules(typeof(EventsDispatcherModule).Assembly);
             builder.RegisterAssemblyModules(typeof(SharedModule).Assembly);
             builder.RegisterType<Worker>();
+            builder.RegisterType<ModelA>();
             var worker = builder.Build().Resolve<Worker>();
 
             await worker.Run();
@@ -28,18 +28,20 @@ namespace Example
 
     public class Worker
     {
+        private readonly IModelFactory _modelFactory;
         private readonly IRepository<ModelA> _repository;
-        public Worker(IRepository<ModelA> repository)
+        public Worker(
+            IModelFactory modelFactory,
+            IRepository<ModelA> repository)
         {
+            _modelFactory = modelFactory;
             _repository = repository;
         }
 
         public async Task Run()
         {
-            var m1 = new ModelA
-            {
-                Name = "Art",
-            };
+            var m1 = _modelFactory.Create<ModelA>();
+            m1.SetName("Witek");
             await _repository.AddOrUpdate(m1);
 
             //var m2 = await _repository.Get(m1.Id);
