@@ -17,9 +17,10 @@ namespace Example
 
         /// <inheritdoc/>
         public byte[] Serialize()
-        {
-            _ = _coder.Encode(Id);
-            return _coder.Encode(Name);
-        }
+            => _coder
+                .Encode(Id)
+                .Encode(Name)
+                .Finilize();
+
     }
 }

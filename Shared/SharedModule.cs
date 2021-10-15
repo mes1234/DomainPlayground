@@ -18,7 +18,7 @@ namespace Doomain.Shared
         /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<JsonCoder>().As<ICoder>();
+            builder.RegisterType<ByteCoder>().As<ICoder>();
         }
     }
 }

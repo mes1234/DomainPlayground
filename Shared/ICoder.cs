@@ -15,7 +15,13 @@ namespace Doomain.Shared
         /// Transform object to its byte representation.
         /// </summary>
         /// <param name="obj">object to transform</param>
-        /// <returns>bytes.</returns>
-        public byte[] Encode(object obj);
+        /// <returns>fluent coder</returns>
+        public ICoder Encode(object obj);
+
+        /// <summary>
+        /// Finilizes this instance.
+        /// </summary>
+        /// <returns></returns>
+        public byte[] Finilize();
     }
 }
