@@ -26,5 +26,11 @@ namespace Doomain.Shared
         /// </summary>
         /// <returns>byte representation</returns>
         public byte[] Serialize();
+
+        /// <summary>
+        /// Deserializes the specified byte.
+        /// </summary>
+        /// <param name="content">The byte.</param>
+        public void Deserialize(byte[] content);
     }
 }

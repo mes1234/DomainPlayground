@@ -22,5 +22,10 @@ namespace Example
                 .Encode(Name)
                 .Finilize();
 
+        /// <inheritdoc/>
+        public void Deserialize(byte[] content)
+        {
+
+        }
     }
 }

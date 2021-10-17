@@ -15,7 +15,6 @@ namespace Doomain.Shared
         private MemoryStream ms;
         private bool disposedValue;
 
-
         /// <inheritdoc/>
         public ICoder Encode(object obj)
         {
@@ -24,6 +23,8 @@ namespace Doomain.Shared
             switch (obj)
             {
                 case string text:
+                    // for variable lenght type there is in front size encoded
+                    ms.Write(BitConverter.GetBytes(text.Length));
                     ms.Write(Encoding.UTF8.GetBytes(text));
                     break;
                 case Guid id:
@@ -32,6 +33,35 @@ namespace Doomain.Shared
                 default:
                     throw new NotImplementedException();
             }
+
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public ICoder Decode(out string obj)
+        {
+            var buffer = new byte[1024];
+            ms.Read(buffer, 0, sizeof(int));
+            var length = BitConverter.ToInt32(buffer);
+            ms.Read(buffer, 0, length);
+            obj = Encoding.UTF8.GetString(buffer, 0, length);
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public ICoder Decode(out Guid obj)
+        {
+            var buffer = new byte[1024];
+            ms.Read(buffer, 0, 16);
+            obj = new Guid(buffer[0..16]);
+
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public ICoder Init(byte[] content)
+        {
+            ms = new MemoryStream(content);
             return this;
         }
 
@@ -45,9 +75,14 @@ namespace Doomain.Shared
             return result;
         }
 
-        private void Start()
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
         {
-            ms = new MemoryStream();
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -70,14 +105,11 @@ namespace Doomain.Shared
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
+        private void Start()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            ms = new MemoryStream();
         }
+
+
     }
 }

@@ -9,8 +9,15 @@ namespace Doomain.Shared
     /// <summary>
     /// Interface used to encode/decode.
     /// </summary>
-    public interface ICoder
+    public interface ICoder : IDisposable
     {
+        /// <summary>
+        /// Initializes the specified content.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <returns>fluent coder</returns>
+        public ICoder Init(byte[] content);
+
         /// <summary>
         /// Transform object to its byte representation.
         /// </summary>
@@ -21,7 +28,21 @@ namespace Doomain.Shared
         /// <summary>
         /// Finilizes this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bytes</returns>
         public byte[] Finilize();
+
+        /// <summary>
+        /// Decodes the specified object.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>fluent coder</returns>
+        public ICoder Decode(out string obj);
+
+        /// <summary>
+        /// Decodes the specified object.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>fluent coder</returns>
+        public ICoder Decode(out Guid obj);
     }
 }
