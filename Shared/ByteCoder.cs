@@ -109,7 +109,5 @@ namespace Doomain.Shared
         {
             ms = new MemoryStream();
         }
-
-
     }
 }
