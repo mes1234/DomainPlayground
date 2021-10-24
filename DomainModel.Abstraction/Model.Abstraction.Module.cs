@@ -22,8 +22,9 @@ namespace Doomain.Abstraction
         /// <param name="builder"></param>
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<Repository<IEvent>>().As<INotificationHandler<AddOrUpdateNotification>>();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(INotificationHandler<>));
+
 
             builder.RegisterType<ModelFactory>().As<IModelFactory>();
         }

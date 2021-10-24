@@ -11,13 +11,12 @@ namespace Doomain.EventsDispatcher
     ///   <br />
     /// </summary>
     /// <typeparam name="T">TODO</typeparam>
-    public class AddOrUpdateItemNotificationHandler<T> : INotificationHandler<AddOrUpdateNotification<T>>
-        where T : IEvent, IEntity
+    public class AddOrUpdateItemNotificationHandler : INotificationHandler<AddOrUpdateNotification>
     {
         private readonly IMediator _mediator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler{T}"/> class.
+        /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler"/> class.
         /// </summary>
         /// <param name="mediator">mediator</param>
         public AddOrUpdateItemNotificationHandler(IMediator mediator)
@@ -32,7 +31,7 @@ namespace Doomain.EventsDispatcher
         ///   <br />
         /// </returns>
         /// <exception cref="System.NotImplementedException">TODO</exception>
-        public async Task Handle(AddOrUpdateNotification<T> notification, CancellationToken cancellationToken)
+        public async Task Handle(AddOrUpdateNotification notification, CancellationToken cancellationToken)
         {
             var item = notification.Item;
 

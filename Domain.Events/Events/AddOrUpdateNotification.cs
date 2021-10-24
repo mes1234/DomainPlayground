@@ -14,17 +14,16 @@ namespace Doomain.Events
     /// </summary>
     /// <typeparam name="T">type</typeparam>
     /// <seealso cref="MediatR.INotification" />
-    public class AddOrUpdateNotification<T> : INotification
-        where T : IEvent, IEntity
+    public class AddOrUpdateNotification : INotification
     {
-        private readonly T _item;
+        private readonly IEvent _item;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddOrUpdateNotification{T}"/> class.
+        /// Initializes a new instance of the <see cref="AddOrUpdateNotification"/> class.
         /// </summary>
         /// <param name="item">item</param>
         /// <param name="dir">direction</param>
-        public AddOrUpdateNotification(T item, Direction dir)
+        public AddOrUpdateNotification(IEvent item, Direction dir)
         {
             _item = item;
             Direction = dir;
@@ -41,6 +40,6 @@ namespace Doomain.Events
         /// <summary>
         /// Gets inside element
         /// </summary>
-        public T Item => _item;
+        public IEvent Item => _item;
     }
 }

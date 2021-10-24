@@ -7,12 +7,15 @@ using Doomain.Abstraction;
 using Doomain.EventsDispatcher;
 using Doomain.Shared;
 using Doomain.Streaming;
+using MediatR.Extensions.Autofac;
+using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+
 
 namespace Doomain.Example
 {
@@ -61,7 +64,8 @@ namespace Doomain.Example
                     builder.RegisterAssemblyModules(typeof(EventsDispatcherModule).Assembly);
                     builder.RegisterAssemblyModules(typeof(SharedModule).Assembly);
                     builder.RegisterAssemblyModules(typeof(StreamingModule).Assembly);
-
+                    builder.RegisterMediatR(typeof(ModelAbstractionModule).Assembly);
+                    builder.RegisterMediatR(typeof(EventsDispatcherModule).Assembly);
                     builder.RegisterType<ModelA>();
                 })
                 .UseSerilog()

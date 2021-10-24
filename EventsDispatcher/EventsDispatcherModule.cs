@@ -21,9 +21,7 @@ namespace Doomain.EventsDispatcher
         /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterGeneric(typeof(AddOrUpdateItemNotificationHandler<>)).AsImplementedInterfaces();
-
-            builder.RegisterType<StoreEventNotificationHandler>().As<INotificationHandler<StoreEventNotification>>();
+            builder.RegisterAssemblyTypes(typeof(EventsDispatcherModule).Assembly).AsImplementedInterfaces();
         }
     }
 }

@@ -1,12 +1,15 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Autofac;
 using Doomain.Abstraction;
 using Doomain.Events;
 using Doomain.Shared;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
 
 namespace Doomain.Example
 {
@@ -18,8 +21,7 @@ namespace Doomain.Example
     {
         private readonly ILogger _logger;
         private readonly IModelFactory _modelFactory;
-        private readonly IMediator _mediator;
-        //   private readonly IRepository<ModelA> _repository;
+        private readonly IRepository<ModelA> _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Worker"/> class.
@@ -30,13 +32,11 @@ namespace Doomain.Example
         public Worker(
             ILogger<Worker> logger,
             IModelFactory modelFactory,
-            IMediator mediator)
-        // IRepository<ModelA> repository)
+            IRepository<ModelA> repository)
         {
             _logger = logger;
             _modelFactory = modelFactory;
-            _mediator = mediator;
-            // _repository = repository;
+            _repository = repository;
         }
 
         /// <summary>
@@ -53,9 +53,8 @@ namespace Doomain.Example
                 await Task.Delay(1000, stoppingToken);
                 var m1 = _modelFactory.Create<ModelA>();
 
-                await _mediator.Publish(new AddOrUpdateNotification<ModelA>(m1, Direction.Outbound)).ConfigureAwait(false);
                 m1.SetName("Witek");
-                // await _repository.AddOrUpdate(m1);
+                await _repository.AddOrUpdate(m1);
             }
         }
     }

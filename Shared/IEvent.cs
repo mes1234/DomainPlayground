@@ -9,7 +9,7 @@ namespace Doomain.Shared
     /// <summary>
     /// Domain event
     /// </summary>
-    public interface IEvent
+    public interface IEvent : IEntity
     {
         /// <summary>
         /// Gets defintion of type of event

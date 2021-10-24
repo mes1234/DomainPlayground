@@ -15,7 +15,7 @@ namespace Doomain.Abstraction
     /// Generic repository 
     /// </summary>
     /// <typeparam name="T">Type of items to store</typeparam>
-    public class Repository<T> : INotificationHandler<AddOrUpdateNotification<T>>, IRepository<T>
+    public class Repository<T> : INotificationHandler<AddOrUpdateNotification>, IRepository<T>
          where T : IEvent, IEntity
     {
         private readonly static ConcurrentDictionary<Guid, T> Repo = new();
@@ -36,7 +36,7 @@ namespace Doomain.Abstraction
         /// <param name="item">item to be added/updated</param>
         public async Task AddOrUpdate(T item)
         {
-            await _mediator.Publish(new AddOrUpdateNotification<T>(item, Direction.Outbound)).ConfigureAwait(false);
+            await _mediator.Publish(new AddOrUpdateNotification(item, Direction.Outbound)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -55,12 +55,12 @@ namespace Doomain.Abstraction
         /// <param name="notification">The notification</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task Handle(AddOrUpdateNotification<T> notification, CancellationToken cancellationToken)
+        public Task Handle(AddOrUpdateNotification notification, CancellationToken cancellationToken)
         {
             // Repository should only take care of inbound notification
             if (notification.Direction == Direction.Outbound) return Task.CompletedTask;
 
-            Repo[notification.Item.Id] = notification.Item;
+            Repo[notification.Item.Id] = (T)notification.Item;
 
             return Task.CompletedTask;
         }
