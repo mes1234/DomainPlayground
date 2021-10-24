@@ -6,6 +6,7 @@ using Autofac.Extensions.DependencyInjection;
 using Doomain.Abstraction;
 using Doomain.EventsDispatcher;
 using Doomain.Shared;
+using Doomain.Streaming;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,7 +50,6 @@ namespace Doomain.Example
               .WriteTo.Console(theme: AnsiConsoleTheme.Code)
               .CreateLogger();
 
-
             CreateHostBuilder(args)
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureContainer<ContainerBuilder>((hostContext, builder) =>
@@ -60,6 +60,8 @@ namespace Doomain.Example
                     builder.RegisterAssemblyModules(typeof(ModelAbstractionModule).Assembly);
                     builder.RegisterAssemblyModules(typeof(EventsDispatcherModule).Assembly);
                     builder.RegisterAssemblyModules(typeof(SharedModule).Assembly);
+                    builder.RegisterAssemblyModules(typeof(StreamingModule).Assembly);
+
                     builder.RegisterType<ModelA>();
                 })
                 .UseSerilog()
@@ -79,6 +81,5 @@ namespace Doomain.Example
                 {
                     services.AddHostedService<Worker>();
                 });
-
     }
 }

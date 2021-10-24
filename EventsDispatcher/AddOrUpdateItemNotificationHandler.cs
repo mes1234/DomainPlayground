@@ -12,7 +12,7 @@ namespace Doomain.EventsDispatcher
     /// </summary>
     /// <typeparam name="T">TODO</typeparam>
     public class AddOrUpdateItemNotificationHandler<T> : INotificationHandler<AddOrUpdateNotification<T>>
-        where T : IEvent
+        where T : IEvent, IEntity
     {
         private readonly IMediator _mediator;
 

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Doomain.Events;
+using Doomain.Shared;
+using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 
 namespace Doomain.Abstraction
@@ -20,7 +23,8 @@ namespace Doomain.Abstraction
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
-            builder.RegisterMediatR(typeof(ModelAbstractionModule).Assembly);
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(INotificationHandler<>));
+
             builder.RegisterType<ModelFactory>().As<IModelFactory>();
         }
     }

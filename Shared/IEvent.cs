@@ -14,12 +14,7 @@ namespace Doomain.Shared
         /// <summary>
         /// Gets defintion of type of event
         /// </summary>
-        public ContentTypes Type { get; }
-
-        /// <summary>
-        /// Gets the identifier.
-        /// </summary>
-        public Guid Id { get; }
+        public Type Type { get; }
 
         /// <summary>
         /// Obtain serialized version of given event
@@ -32,5 +27,7 @@ namespace Doomain.Shared
         /// </summary>
         /// <param name="content">The byte.</param>
         public void Deserialize(byte[] content);
+
+
     }
 }

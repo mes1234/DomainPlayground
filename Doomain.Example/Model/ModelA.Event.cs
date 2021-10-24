@@ -11,7 +11,10 @@ namespace Doomain.Example
     public partial class ModelA
     {
         /// <inheritdoc/>
-        public ContentTypes Type => ContentTypes.ModelA;
+        public Guid EntityId => Id;
+
+        /// <inheritdoc/>
+        public Type Type => typeof(ModelA);
 
         /// <inheritdoc/>
         public byte[] Serialize()
@@ -24,5 +27,6 @@ namespace Doomain.Example
         public void Deserialize(byte[] content)
         {
         }
+
     }
 }

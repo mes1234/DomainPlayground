@@ -1,5 +1,6 @@
 ﻿using System;
 using Doomain.Shared;
+using MediatR;
 
 namespace Doomain.Example
 {

@@ -21,7 +21,7 @@ namespace Doomain.Events
         /// <summary>
         /// Gets the type of the content.</summary>
         /// <value>The type of the content.</value>
-        public ContentTypes ContentType { get; init; }
+        public Type ContentType { get; init; }
 
         /// <summary>
         /// Gets the content.</summary>
@@ -32,5 +32,13 @@ namespace Doomain.Events
         /// Gets the identifier.</summary>
         /// <value>The identifier.</value>
         public Guid Id { get; init; }
+
+        /// <summary>
+        /// Gets  the revision.
+        /// </summary>
+        /// <value>
+        /// The revision.
+        /// </value>
+        public int Revision { get; init; }
     }
 }

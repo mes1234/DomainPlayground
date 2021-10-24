@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Doomain.Events;
 using MediatR;
+using MediatR.Extensions.Autofac.DependencyInjection;
 
 namespace Doomain.EventsDispatcher
 {
@@ -21,6 +22,7 @@ namespace Doomain.EventsDispatcher
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(AddOrUpdateItemNotificationHandler<>)).AsImplementedInterfaces();
+
             builder.RegisterType<StoreEventNotificationHandler>().As<INotificationHandler<StoreEventNotification>>();
         }
     }

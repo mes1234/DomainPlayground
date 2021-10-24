@@ -24,6 +24,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Domain.Events\Events\Doomain.Events.csproj" />
 		<ProjectReference Include="..\DomainModel.Abstraction\Doomain.Abstraction.csproj" />
+		<ProjectReference Include="..\Doomain.Streaming\Doomain.Streaming.csproj" />
 		<ProjectReference Include="..\EventsDispatcher\Doomain.EventsDispatcher.csproj" />
 		<ProjectReference Include="..\Shared\Doomain.Shared.csproj" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">

@@ -14,17 +14,9 @@
 		<PackageReference Include="Autofac" Version="6.3.0" />
 		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-		<PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="7.3.0" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\Domain.Events\Events\Doomain.Events.csproj" />
-		<ProjectReference Include="..\Doomain.Streaming\Doomain.Streaming.csproj" />
-		<ProjectReference Include="..\Shared\Doomain.Shared.csproj" />
-	</ItemGroup>
-
 </Project>

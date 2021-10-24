@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Shared.Tests", "Doo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doomain.Example", "Doomain.Example\Doomain.Example.csproj", "{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doomain.Streaming", "Doomain.Streaming\Doomain.Streaming.csproj", "{F720D587-8DE7-441B-9A13-84D3D8012CDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
