@@ -30,7 +30,6 @@ namespace Doomain.EventsDispatcher
         /// <returns>
         ///   <br />
         /// </returns>
-        /// <exception cref="System.NotImplementedException">TODO</exception>
         public async Task Handle(StoreEventNotification notification, CancellationToken cancellationToken)
         {
             switch (notification.EventType)

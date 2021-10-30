@@ -84,6 +84,7 @@ namespace Doomain.Example
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
+                    services.AddHostedService<FakeStreaming>();
                 });
     }
 }

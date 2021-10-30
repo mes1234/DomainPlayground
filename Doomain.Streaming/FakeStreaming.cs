@@ -1,19 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Doomain.Streaming
 {
     /// <summary>
     /// Generic streaming utility
     /// </summary>
-    public class FakeStreaming : IStreaming
+    public class FakeStreaming : BackgroundService, IStreaming
     {
+        private readonly IEnumerable<IStreamingHandler> handlers;
+
         /// <summary>
-        /// Publishes the specified topic.
+        /// Initializes a new instance of the <see cref="FakeStreaming"/> class.
         /// </summary>
-        /// <param name="topic">The topic.</param>
-        /// <param name="content">The content.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        public FakeStreaming(IServiceProvider serviceProvider)
+        {
+            handlers = serviceProvider.GetServices<IStreamingHandler>();
+        }
+
+        /// <inheritdoc/>
         public Task Publish(Topic topic, byte[] content)
+        {
+            foreach (var handler in handlers.Where(x => x.SupportedTopic == topic))
+            {
+                handler.Handle(content);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        /// <inheritdoc/>
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             return Task.CompletedTask;
         }

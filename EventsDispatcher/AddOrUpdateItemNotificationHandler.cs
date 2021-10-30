@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Doomain.Events;
 using Doomain.Shared;
+using Doomain.Streaming;
 using MediatR;
 
 namespace Doomain.EventsDispatcher
@@ -11,7 +12,7 @@ namespace Doomain.EventsDispatcher
     ///   <br />
     /// </summary>
     /// <typeparam name="T">TODO</typeparam>
-    public class AddOrUpdateItemNotificationHandler : INotificationHandler<AddOrUpdateNotification>
+    public class AddOrUpdateItemNotificationHandler : INotificationHandler<AddOrUpdateNotification>, IStreamingHandler
     {
         private readonly IMediator _mediator;
 
@@ -23,6 +24,10 @@ namespace Doomain.EventsDispatcher
         {
             _mediator = mediator;
         }
+
+        /// <inheritdoc/>
+        public Topic SupportedTopic => Topic.AddOrUpdated;
+
 
         /// <summary>Handles a notification</summary>
         /// <param name="notification">The notification</param>
@@ -42,6 +47,12 @@ namespace Doomain.EventsDispatcher
                 EventType = EventTypes.AddedOrUpdated,
                 Id = item.Id,
             }).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc/>
+        public Task<Status> Handle(byte[] content)
+        {
+            return Task.FromResult(Status.Ack);
         }
     }
 }

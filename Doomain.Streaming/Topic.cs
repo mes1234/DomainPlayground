@@ -15,6 +15,12 @@ namespace Doomain.Streaming
         /// The add or updated stream
         /// </summary>
         public static Topic AddOrUpdated = new("generic", "addedorupdated");
+
+        /// <summary>
+        /// The delete stream
+        /// </summary>
+        public static Topic Delete = new("generic", "deleted");
+
         private readonly string _stream;
         private readonly string _topic;
 
