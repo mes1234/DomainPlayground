@@ -30,6 +30,9 @@ namespace Doomain.Shared
                 case Guid id:
                     ms.Write(id.ToByteArray());
                     break;
+                case int intValue:
+                    ms.Write(BitConverter.GetBytes(intValue));
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -54,6 +57,16 @@ namespace Doomain.Shared
             var buffer = new byte[1024];
             ms.Read(buffer, 0, 16);
             obj = new Guid(buffer[0..16]);
+
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public ICoder Decode(out int obj)
+        {
+            var buffer = new byte[1024];
+            ms.Read(buffer, 0, 4);
+            obj = BitConverter.ToInt32(buffer);
 
             return this;
         }

@@ -12,7 +12,6 @@ namespace Doomain.Events
     /// <summary>
     /// AddOrUpdateNotification
     /// </summary>
-    /// <typeparam name="T">type</typeparam>
     /// <seealso cref="MediatR.INotification" />
     public class AddOrUpdateNotification : INotification
     {

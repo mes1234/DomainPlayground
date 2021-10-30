@@ -22,8 +22,9 @@ namespace Doomain.Streaming
         /// <summary>
         /// Handles the specified content.
         /// </summary>
+        /// <param name="header">The header.</param>
         /// <param name="content">The content.</param>
         /// <returns>Status</returns>
-        public Task<Status> Handle(byte[] content);
+        public Task<Status> Handle(byte[] header, byte[] content);
     }
 }

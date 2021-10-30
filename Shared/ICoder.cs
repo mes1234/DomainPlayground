@@ -44,5 +44,12 @@ namespace Doomain.Shared
         /// <param name="obj">The object.</param>
         /// <returns>fluent coder</returns>
         public ICoder Decode(out Guid obj);
+
+        /// <summary>
+        /// Decodes the specified object.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>fluent coder</returns>
+        public ICoder Decode(out int obj);
     }
 }

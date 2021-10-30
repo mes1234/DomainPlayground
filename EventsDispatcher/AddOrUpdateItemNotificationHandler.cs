@@ -11,23 +11,26 @@ namespace Doomain.EventsDispatcher
     /// <summary>
     ///   <br />
     /// </summary>
-    /// <typeparam name="T">TODO</typeparam>
     public class AddOrUpdateItemNotificationHandler : INotificationHandler<AddOrUpdateNotification>, IStreamingHandler
     {
         private readonly IMediator _mediator;
+        private readonly ICoder _coder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler"/> class.
         /// </summary>
         /// <param name="mediator">mediator</param>
-        public AddOrUpdateItemNotificationHandler(IMediator mediator)
+        /// <param name="coder">coder</param>
+        public AddOrUpdateItemNotificationHandler(
+            IMediator mediator,
+            ICoder coder)
         {
             _mediator = mediator;
+            _coder = coder;
         }
 
         /// <inheritdoc/>
         public Topic SupportedTopic => Topic.AddOrUpdated;
-
 
         /// <summary>Handles a notification</summary>
         /// <param name="notification">The notification</param>
@@ -40,7 +43,7 @@ namespace Doomain.EventsDispatcher
         {
             var item = notification.Item;
 
-            await _mediator.Publish(new StoreEventNotification
+            await _mediator.Publish(new StoreEventNotification(_coder)
             {
                 Content = item.Serialize(),
                 ContentType = item.Type,
@@ -50,9 +53,14 @@ namespace Doomain.EventsDispatcher
         }
 
         /// <inheritdoc/>
-        public Task<Status> Handle(byte[] content)
+        public async Task<Status> Handle(byte[] header, byte[] content)
         {
-            return Task.FromResult(Status.Ack);
+            var storeEventNotification = new StoreEventNotification(_coder, header, content);
+
+            // This default should be instantiated and propagated with content
+            await _mediator.Publish(new AddOrUpdateNotification(default, Direction.Inbound)).ConfigureAwait(false);
+
+            return Status.Ack;
         }
     }
 }

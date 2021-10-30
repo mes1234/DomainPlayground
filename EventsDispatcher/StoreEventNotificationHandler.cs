@@ -35,7 +35,7 @@ namespace Doomain.EventsDispatcher
             switch (notification.EventType)
             {
                 case EventTypes.AddedOrUpdated:
-                    await _streaming.Publish(Topic.AddOrUpdated, notification.Content).ConfigureAwait(false);
+                    await _streaming.Publish(Topic.AddOrUpdated, notification.Header, notification.Content).ConfigureAwait(false);
                     break;
                 case EventTypes.Deleted:
                     break;
