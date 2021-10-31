@@ -1,15 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Autofac;
 using Doomain.Abstraction;
-using Doomain.Events;
-using Doomain.Shared;
-using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
 
 namespace Doomain.Example
 {

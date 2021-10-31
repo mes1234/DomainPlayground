@@ -57,8 +57,9 @@ namespace Doomain.EventsDispatcher
         {
             var storeEventNotification = new StoreEventNotification(_coder, header, content);
 
-            // This default should be instantiated and propagated with content
-            await _mediator.Publish(new AddOrUpdateNotification(default, Direction.Inbound)).ConfigureAwait(false);
+            var obj = (IEvent)Activator.CreateInstance(storeEventNotification.ContentType, new object[] { _coder });
+            obj.Deserialize(content);
+            await _mediator.Publish(new AddOrUpdateNotification(obj, Direction.Inbound)).ConfigureAwait(false);
 
             return Status.Ack;
         }

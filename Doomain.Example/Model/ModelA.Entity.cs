@@ -7,7 +7,7 @@ namespace Doomain.Example
     /// </summary>
     public partial class ModelA
     {
-        private readonly Guid _id;
+        private Guid _id;
 
         /// <inheritdoc/>
         public Guid Id => _id;

@@ -25,14 +25,12 @@ namespace Doomain.Streaming
         }
 
         /// <inheritdoc/>
-        public Task Publish(Topic topic, byte[] header, byte[] content)
+        public async Task Publish(Topic topic, byte[] header, byte[] content)
         {
             foreach (var handler in handlers.Where(x => x.SupportedTopic == topic))
             {
-                handler.Handle(header, content);
+                await handler.Handle(header, content);
             }
-
-            return Task.CompletedTask;
         }
 
         /// <inheritdoc/>

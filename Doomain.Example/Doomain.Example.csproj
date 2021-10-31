@@ -6,6 +6,7 @@
 		<Version>1.0.0-alpha1.1</Version>
 		<Description>C# client for Locker</Description>
 		<LangVersion>9.0</LangVersion>
+		<WarningsAsErrors>true</WarningsAsErrors>
 		<Authors>github.com\mes1234</Authors>
 		<CodeAnalysisRuleSet>..\rules.ruleset</CodeAnalysisRuleSet>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>

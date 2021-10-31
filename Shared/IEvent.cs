@@ -27,7 +27,5 @@ namespace Doomain.Shared
         /// </summary>
         /// <param name="content">The byte.</param>
         public void Deserialize(byte[] content);
-
-
     }
 }
