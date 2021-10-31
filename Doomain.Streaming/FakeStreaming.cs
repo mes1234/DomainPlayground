@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Doomain.Streaming
 {
@@ -14,14 +15,18 @@ namespace Doomain.Streaming
     public class FakeStreaming : BackgroundService, IStreaming
     {
         private readonly IEnumerable<IStreamingHandler> handlers;
+        private readonly ILogger<FakeStreaming> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeStreaming"/> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
-        public FakeStreaming(IServiceProvider serviceProvider)
+        public FakeStreaming(
+            IServiceProvider serviceProvider,
+            ILogger<FakeStreaming> logger)
         {
             handlers = serviceProvider.GetServices<IStreamingHandler>();
+            _logger = logger;
         }
 
         /// <inheritdoc/>
@@ -29,6 +34,7 @@ namespace Doomain.Streaming
         {
             foreach (var handler in handlers.Where(x => x.SupportedTopic == topic))
             {
+                _logger.LogInformation("Handling publish for topic {@topic}", topic);
                 await handler.Handle(header, content);
             }
         }

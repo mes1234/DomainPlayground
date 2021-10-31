@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Doomain.Events;
+using Doomain.Streaming;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 
@@ -21,7 +22,8 @@ namespace Doomain.EventsDispatcher
         /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(EventsDispatcherModule).Assembly).AsImplementedInterfaces();
+            builder.RegisterType<AddOrUpdateItemNotificationHandler>()
+                .As<IStreamingHandler>();
         }
     }
 }

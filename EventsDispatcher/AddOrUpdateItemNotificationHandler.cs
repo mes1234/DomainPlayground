@@ -5,6 +5,7 @@ using Doomain.Events;
 using Doomain.Shared;
 using Doomain.Streaming;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Doomain.EventsDispatcher
 {
@@ -13,19 +14,24 @@ namespace Doomain.EventsDispatcher
     /// </summary>
     public class AddOrUpdateItemNotificationHandler : INotificationHandler<AddOrUpdateNotification>, IStreamingHandler
     {
+        private static int counter = 0;
         private readonly IMediator _mediator;
+        private readonly ILogger<AddOrUpdateItemNotificationHandler> _logger;
         private readonly ICoder _coder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler"/> class.
         /// </summary>
         /// <param name="mediator">mediator</param>
+        /// <param name="logger">logger</param>
         /// <param name="coder">coder</param>
         public AddOrUpdateItemNotificationHandler(
             IMediator mediator,
+            ILogger<AddOrUpdateItemNotificationHandler> logger,
             ICoder coder)
         {
             _mediator = mediator;
+            _logger = logger;
             _coder = coder;
         }
 
@@ -38,10 +44,13 @@ namespace Doomain.EventsDispatcher
         /// <returns>
         ///   <br />
         /// </returns>
-        /// <exception cref="System.NotImplementedException">TODO</exception>
         public async Task Handle(AddOrUpdateNotification notification, CancellationToken cancellationToken)
         {
+            var time = DateTime.Now;
+            counter++;
             if (notification.Direction == Direction.Inbound) return;
+
+            _logger.LogInformation("Handling Outbound {@notification} in revision {revision}", notification, notification.Item.Revision);
 
             var item = notification.Item;
 
@@ -60,6 +69,8 @@ namespace Doomain.EventsDispatcher
             try
             {
                 IEvent obj = BuildEvent(header, content);
+
+                _logger.LogInformation("Handling Inbound {@obj} in revision {revision}", obj, obj.Revision);
 
                 await _mediator
                     .Publish(new AddOrUpdateNotification(obj, Direction.Inbound))

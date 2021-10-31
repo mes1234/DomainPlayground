@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Doomain.Events;
 using Doomain.Shared;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Doomain.Abstraction
 {
@@ -20,14 +21,19 @@ namespace Doomain.Abstraction
     {
         private readonly static ConcurrentDictionary<Guid, T> Repo = new();
         private readonly IMediator _mediator;
+        private readonly ILogger<Repository<T>> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Repository{T}"/> class.
         /// </summary>
         /// <param name="mediator">The mediator.</param>
-        public Repository(IMediator mediator)
+        /// <param name="logger">logger</param>
+        public Repository(
+            IMediator mediator,
+            ILogger<Repository<T>> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         /// <summary>
@@ -42,6 +48,8 @@ namespace Doomain.Abstraction
               item.Id,
               item,
               (key, value) => item);
+
+            _logger.LogInformation("Added item to Repository from internal source {@item} in revision {revision}", item, item.Revision);
 
             await _mediator.Publish(new AddOrUpdateNotification(item, Direction.Outbound)).ConfigureAwait(false);
         }
@@ -67,10 +75,9 @@ namespace Doomain.Abstraction
             // Repository should only take care of inbound notification
             if (notification.Direction == Direction.Outbound) return Task.CompletedTask;
 
-            Repo.AddOrUpdate(
-                notification.Item.Id,
-                (T)notification.Item,
-                (key, value) => (T)notification.Item);
+            Repo.AddOrUpdate(notification.Item.Id, (T)notification.Item, (key, value) => (T)notification.Item);
+
+            _logger.LogInformation("Added item to Repository from external source {@item} in revision {revision}", notification.Item, notification.Item.Revision);
 
             return Task.CompletedTask;
         }
