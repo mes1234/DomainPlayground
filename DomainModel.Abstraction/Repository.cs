@@ -36,6 +36,13 @@ namespace Doomain.Abstraction
         /// <param name="item">item to be added/updated</param>
         public async Task AddOrUpdate(T item)
         {
+            item.Revision++;
+
+            Repo.AddOrUpdate(
+              item.Id,
+              item,
+              (key, value) => item);
+
             await _mediator.Publish(new AddOrUpdateNotification(item, Direction.Outbound)).ConfigureAwait(false);
         }
 
@@ -60,7 +67,10 @@ namespace Doomain.Abstraction
             // Repository should only take care of inbound notification
             if (notification.Direction == Direction.Outbound) return Task.CompletedTask;
 
-            Repo[notification.Item.Id] = (T)notification.Item;
+            Repo.AddOrUpdate(
+                notification.Item.Id,
+                (T)notification.Item,
+                (key, value) => (T)notification.Item);
 
             return Task.CompletedTask;
         }

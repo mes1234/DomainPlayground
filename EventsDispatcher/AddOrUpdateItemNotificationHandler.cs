@@ -41,6 +41,8 @@ namespace Doomain.EventsDispatcher
         /// <exception cref="System.NotImplementedException">TODO</exception>
         public async Task Handle(AddOrUpdateNotification notification, CancellationToken cancellationToken)
         {
+            if (notification.Direction == Direction.Inbound) return;
+
             var item = notification.Item;
 
             await _mediator.Publish(new StoreEventNotification(_coder)
@@ -55,13 +57,39 @@ namespace Doomain.EventsDispatcher
         /// <inheritdoc/>
         public async Task<Status> Handle(byte[] header, byte[] content)
         {
+            try
+            {
+                IEvent obj = BuildEvent(header, content);
+
+                await _mediator
+                    .Publish(new AddOrUpdateNotification(obj, Direction.Inbound))
+                    .ConfigureAwait(false);
+
+                return Status.Ack;
+            }
+            catch (Exception)
+            {
+                return Status.Nack;
+            }
+        }
+
+        /// <summary>
+        /// Builds the event.
+        /// </summary>
+        /// <param name="header">The header.</param>
+        /// <param name="content">The content.</param>
+        /// <returns>IEvent</returns>
+        private IEvent BuildEvent(byte[] header, byte[] content)
+        {
             var storeEventNotification = new StoreEventNotification(_coder, header, content);
-
             var obj = (IEvent)Activator.CreateInstance(storeEventNotification.ContentType, new object[] { _coder });
-            obj.Deserialize(content);
-            await _mediator.Publish(new AddOrUpdateNotification(obj, Direction.Inbound)).ConfigureAwait(false);
 
-            return Status.Ack;
+            obj.Deserialize(content);
+
+            // Fake bump revision
+            obj.Revision++;
+
+            return obj;
         }
     }
 }

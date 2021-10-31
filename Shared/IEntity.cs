@@ -11,5 +11,13 @@ namespace Doomain.Shared
         /// Gets Id of given entity
         /// </summary>
         public Guid Id { get; }
+
+        /// <summary>
+        /// Gets or sets the revisison.
+        /// </summary>
+        /// <value>
+        /// The revisison.
+        /// </value>
+        public int Revision { get; set; }
     }
 }

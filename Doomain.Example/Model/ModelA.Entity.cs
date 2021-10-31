@@ -11,5 +11,8 @@ namespace Doomain.Example
 
         /// <inheritdoc/>
         public Guid Id => _id;
+
+        /// <inheritdoc/>
+        public int Revision { get; set; }
     }
 }

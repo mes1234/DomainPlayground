@@ -17,6 +17,7 @@ namespace Doomain.Example
         public byte[] Serialize()
             => _coder
                 .Encode(Id)
+            .Encode(Revision)
                 .Encode(Name)
                 .Finilize();
 
@@ -26,9 +27,11 @@ namespace Doomain.Example
             _coder
                 .Init(content)
                 .Decode(out _id)
+                .Decode(out int revision)
                 .Decode(out string name)
                 .Finilize();
 
+            Revision = revision;
             Name = name;
         }
     }

@@ -41,14 +41,22 @@ namespace Doomain.Example
         /// <returns>Task</returns>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            var m1 = _modelFactory.Create<ModelA>();
+            var counter = 1;
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-                var m1 = _modelFactory.Create<ModelA>();
+                try
+                {
+                    _logger.LogInformation("Worker running  iteration {counter}", counter);
 
-                m1.SetName("Witek");
-                await _repository.AddOrUpdate(m1);
+                    m1.SetName("Witek");
+                    await _repository.AddOrUpdate(m1);
+                    counter++;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Worker error at: {time} {@ex}", DateTimeOffset.Now, ex);
+                }
             }
         }
     }
