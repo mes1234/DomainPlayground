@@ -14,22 +14,26 @@ namespace Doomain.EventsDispatcher
     /// </summary>
     public class AddOrUpdateItemNotificationHandler : INotificationHandler<AddOrUpdateNotification>, IStreamingHandler
     {
-        private static int counter = 0;
         private readonly IMediator _mediator;
         private readonly ILogger<AddOrUpdateItemNotificationHandler> _logger;
+        private readonly IEventBuilder _eventBuilder;
         private readonly ICoder _coder;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler"/> class.
         /// </summary>
+        /// <param name="eventBuilder">eventBuilder</param>
         /// <param name="mediator">mediator</param>
         /// <param name="logger">logger</param>
         /// <param name="coder">coder</param>
         public AddOrUpdateItemNotificationHandler(
+            IEventBuilder eventBuilder,
             IMediator mediator,
             ILogger<AddOrUpdateItemNotificationHandler> logger,
             ICoder coder)
         {
+            _eventBuilder = eventBuilder;
             _mediator = mediator;
             _logger = logger;
             _coder = coder;
@@ -46,8 +50,6 @@ namespace Doomain.EventsDispatcher
         /// </returns>
         public async Task Handle(AddOrUpdateNotification notification, CancellationToken cancellationToken)
         {
-            var time = DateTime.Now;
-            counter++;
             if (notification.Direction == Direction.Inbound) return;
 
             _logger.LogInformation("Handling Outbound {@notification} in revision {revision}", notification, notification.Item.Revision);
@@ -68,7 +70,7 @@ namespace Doomain.EventsDispatcher
         {
             try
             {
-                IEvent obj = BuildEvent(header, content);
+                IEvent obj = _eventBuilder.BuildEvent(header, content);
 
                 _logger.LogInformation("Handling Inbound {@obj} in revision {revision}", obj, obj.Revision);
 
@@ -82,25 +84,6 @@ namespace Doomain.EventsDispatcher
             {
                 return Status.Nack;
             }
-        }
-
-        /// <summary>
-        /// Builds the event.
-        /// </summary>
-        /// <param name="header">The header.</param>
-        /// <param name="content">The content.</param>
-        /// <returns>IEvent</returns>
-        private IEvent BuildEvent(byte[] header, byte[] content)
-        {
-            var storeEventNotification = new StoreEventNotification(_coder, header, content);
-            var obj = (IEvent)Activator.CreateInstance(storeEventNotification.ContentType, new object[] { _coder });
-
-            obj.Deserialize(content);
-
-            // Fake bump revision
-            obj.Revision++;
-
-            return obj;
         }
     }
 }

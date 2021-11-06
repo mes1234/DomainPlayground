@@ -16,10 +16,10 @@ namespace Doomain.Abstraction
     /// Generic repository 
     /// </summary>
     /// <typeparam name="T">Type of items to store</typeparam>
-    public class Repository<T> : INotificationHandler<AddOrUpdateNotification>, IRepository<T>
+    public partial class Repository<T> : INotificationHandler<AddOrUpdateNotification>, IRepository<T>
          where T : IEvent, IEntity
     {
-        private readonly static ConcurrentDictionary<Guid, T> Repo = new();
+        private readonly ConcurrentDictionary<Guid, T> Repo = new();
         private readonly IMediator _mediator;
         private readonly ILogger<Repository<T>> _logger;
 
@@ -59,27 +59,13 @@ namespace Doomain.Abstraction
         /// </summary>
         /// <param name="id">Id of item</param>
         /// <returns></returns>
-        public async Task<T> Get(Guid id)
+        public T Get(Guid id)
         {
-            return (T)await _mediator.Send(new GetRequest(id));
-        }
+            _logger.LogInformation("Attempt to retrieve item from repository {id}", id);
 
-        /// <summary>
-        /// Handles a notification
-        /// </summary>
-        /// <param name="notification">The notification</param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns></returns>
-        public Task Handle(AddOrUpdateNotification notification, CancellationToken cancellationToken)
-        {
-            // Repository should only take care of inbound notification
-            if (notification.Direction == Direction.Outbound) return Task.CompletedTask;
+            Repo.TryGetValue(id, out T value);
 
-            Repo.AddOrUpdate(notification.Item.Id, (T)notification.Item, (key, value) => (T)notification.Item);
-
-            _logger.LogInformation("Added item to Repository from external source {@item} in revision {revision}", notification.Item, notification.Item.Revision);
-
-            return Task.CompletedTask;
+            return value ?? throw new KeyNotFoundException($"Key {id} was not found");
         }
 
         /// <summary>
@@ -90,7 +76,6 @@ namespace Doomain.Abstraction
         {
             await _mediator.Publish(new RemoveNotification(id));
         }
-
 
     }
 }

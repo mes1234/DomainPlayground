@@ -37,5 +37,14 @@ namespace Doomain.Example
         {
             Name = name;
         }
+
+        /// <summary>
+        /// Sets the unique identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public void SetGuid(Guid id)
+        {
+            _id = id;
+        }
     }
 }

@@ -44,17 +44,12 @@ namespace Doomain.Events
                 .Decode(out int eventType);
 
             Id = id;
+
             Revision = revision;
+
             EventType = (EventTypes)eventType;
 
-            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                if (ass.FullName.StartsWith("System."))
-                    continue;
-                ContentType = ass.GetType(contentType);
-                if (ContentType != null)
-                    break;
-            }
+            ContentType = GetContentType(contentType);
         }
 
         /// <summary>
@@ -100,5 +95,20 @@ namespace Doomain.Events
                   .Encode(ContentType.FullName)
                   .Encode((int)EventType)
                   .Finilize();
+
+        private Type GetContentType(string contentTypeName)
+        {
+            Type contentType;
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (assembly.FullName.StartsWith("System."))
+                    continue;
+                contentType = assembly.GetType(contentTypeName);
+                if (contentType != null)
+                    return contentType;
+            }
+
+            throw new KeyNotFoundException($"Cannot find Type {contentTypeName}");
+        }
     }
 }

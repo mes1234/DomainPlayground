@@ -18,7 +18,7 @@ namespace Doomain.Streaming
         /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<FakeStreaming>().As<IStreaming>();
+            builder.RegisterType<NatsStreaming>().As<IStreaming>();
         }
     }
 }

@@ -34,5 +34,11 @@ namespace Doomain.Streaming
             _stream = stream;
             _topic = topic;
         }
+
+        /// <summary>
+        /// Gets the topic.
+        /// </summary>
+        /// <returns>materilized</returns>
+        public string GetTopic() => $"{_stream}.{_topic}";
     }
 }

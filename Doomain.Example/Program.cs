@@ -82,8 +82,8 @@ namespace Doomain.Example
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
-                    //     services.AddHostedService<FakeStreaming>();
+                    services.AddHostedService<WorkerOne>();
+                    services.AddHostedService<NatsStreaming>();
                 });
     }
 }

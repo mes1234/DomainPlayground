@@ -32,7 +32,7 @@ namespace Doomain.Abstraction
         /// </summary>
         /// <param name="id">Id of item</param>
         /// <returns></returns>
-        public Task<T> Get(Guid id);
+        public T Get(Guid id);
 
     }
 }
