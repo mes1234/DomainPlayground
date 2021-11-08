@@ -52,7 +52,7 @@ namespace Doomain.Example
                     _logger.LogInformation("WorkerOne running  ");
                     try
                     {
-                        await Task.Delay(10 * 1000).ConfigureAwait(false);
+                        await Task.Delay( 1000).ConfigureAwait(false);
                         m1 = _repository.Get(Guid.Parse("0721c89a-1437-4906-af53-da4d3880da6f"));
                     }
                     catch (KeyNotFoundException)
