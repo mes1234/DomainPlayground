@@ -22,7 +22,7 @@ namespace Doomain.Abstraction
         /// <param name="builder"></param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));//.InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
             builder.RegisterType<ModelFactory>().As<IModelFactory>();
         }
     }

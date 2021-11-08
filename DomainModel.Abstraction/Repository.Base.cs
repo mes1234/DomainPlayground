@@ -19,7 +19,7 @@ namespace Doomain.Abstraction
     public partial class Repository<T> : INotificationHandler<AddOrUpdateNotification>, IRepository<T>
          where T : IEvent, IEntity
     {
-        private readonly ConcurrentDictionary<Guid, T> Repo = new();
+        private static readonly ConcurrentDictionary<Guid, T> Repo = new();
         private readonly IMediator _mediator;
         private readonly ILogger<Repository<T>> _logger;
 

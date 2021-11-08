@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Doomain.Abstraction;
@@ -42,18 +43,27 @@ namespace Doomain.Example
         /// <returns>Task</returns>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var m1 = _modelFactory.Create<ModelA>();
+            ModelA m1;
 
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
                 {
                     _logger.LogInformation("WorkerOne running  ");
+                    try
+                    {
+                        await Task.Delay(10 * 1000).ConfigureAwait(false);
+                        m1 = _repository.Get(Guid.Parse("0721c89a-1437-4906-af53-da4d3880da6f"));
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        m1 = _modelFactory.Create<ModelA>();
+                        m1.SetName("Witek");
+                        m1.SetGuid(Guid.Parse("0721c89a-1437-4906-af53-da4d3880da6f"));
+                    }
 
-                    m1.SetName("Witek");
-                    m1.SetGuid(Guid.Parse("0721c89a-1437-4906-af53-da4d3880da6f"));
                     await _repository.AddOrUpdate(m1);
-                    await Task.Delay(1000 * 3600);
+                    await Task.Delay(1000 * 3);
                 }
                 catch (Exception ex)
                 {

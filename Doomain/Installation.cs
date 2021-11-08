@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using Doomain.Abstraction;
+using Doomain.Events;
 using Doomain.EventsDispatcher;
 using Doomain.Shared;
 using Doomain.Streaming;
+using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -34,15 +36,13 @@ namespace Doomain
 
         private static void InstallRepositiories(this ContainerBuilder containerBuilder)
         {
-           
-
             var modelTypes = GetAllTypesThatImplementInterface();
             foreach (var modelType in modelTypes)
                 containerBuilder.RegisterType(typeof(Repository<>)
                        .MakeGenericType(modelType))
-                       .As(typeof(Repository<>).MakeGenericType(modelType));
+                       .As<INotificationHandler<AddOrUpdateNotification>>();
+               //        .As(typeof(Repository<>).MakeGenericType(modelType));
         }
-
 
         private static IEnumerable<Type> GetAllTypesThatImplementInterface()
         {

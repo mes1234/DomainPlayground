@@ -60,7 +60,6 @@ namespace Doomain.Streaming
 
                 var pso = PushSubscribeOptions
                     .Builder()
-                    .WithDurable("Dummy")
                     .Build();
 
                 var js = c.CreateJetStreamContext();
@@ -69,7 +68,7 @@ namespace Doomain.Streaming
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    await Task.Delay(1000).ConfigureAwait(false);
+                    await Task.Delay(10000).ConfigureAwait(false);
                 }
 
                 return;
