@@ -19,7 +19,6 @@ namespace Doomain.EventsDispatcher
         private readonly IEventBuilder _eventBuilder;
         private readonly ICoder _coder;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AddOrUpdateItemNotificationHandler"/> class.
         /// </summary>

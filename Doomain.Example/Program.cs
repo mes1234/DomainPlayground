@@ -4,9 +4,11 @@ using System.Linq;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Doomain.Abstraction;
+using Doomain.Events;
 using Doomain.EventsDispatcher;
 using Doomain.Shared;
 using Doomain.Streaming;
+using MediatR;
 using MediatR.Extensions.Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -59,12 +61,7 @@ namespace Doomain.Example
                     // Register your own things directly with Autofac here. Don't
                     // call builder.Populate(), that happens in AutofacServiceProviderFactory
                     // for you.
-                    builder.RegisterAssemblyModules(typeof(ModelAbstractionModule).Assembly);
-                    builder.RegisterAssemblyModules(typeof(EventsDispatcherModule).Assembly);
-                    builder.RegisterAssemblyModules(typeof(SharedModule).Assembly);
-                    builder.RegisterAssemblyModules(typeof(StreamingModule).Assembly);
-                    builder.RegisterMediatR(typeof(ModelAbstractionModule).Assembly);
-                    builder.RegisterMediatR(typeof(EventsDispatcherModule).Assembly);
+                    builder.InstallDoomain();
                     builder.RegisterType<ModelA>();
                 })
                 .UseSerilog()

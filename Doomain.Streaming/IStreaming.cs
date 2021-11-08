@@ -12,9 +12,8 @@ namespace Doomain.Streaming
         /// Publishes the specified topic.
         /// </summary>
         /// <param name="topic">The topic.</param>
-        /// <param name="header">The header.</param>
-        /// <param name="content">The content.</param>
+        /// <param name="msg">The message.</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
-        public Task Publish(Topic topic, byte[] header, byte[] content);
+        public Task Publish(Topic topic, byte[] msg);
     }
 }

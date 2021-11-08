@@ -8,7 +8,6 @@ using Doomain.Shared;
 
 namespace Doomain.EventsDispatcher
 {
-
     /// <inheritdoc/>
     public class EventBuilder : IEventBuilder
     {

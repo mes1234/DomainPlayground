@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Doomain.Events;
@@ -35,11 +36,29 @@ namespace Doomain.EventsDispatcher
             switch (notification.EventType)
             {
                 case EventTypes.AddedOrUpdated:
-                    await _streaming.Publish(Topic.AddOrUpdated, notification.Header, notification.Content).ConfigureAwait(false);
+                    await _streaming.Publish(Topic.AddOrUpdated, GetMessage(notification.Header, notification.Content)).ConfigureAwait(false);
                     break;
                 case EventTypes.Deleted:
                     break;
             }
+        }
+
+        private static byte[] GetMessage(byte[] header, byte[] content)
+        {
+            var headerSize = BitConverter.GetBytes(header.Length);
+            var contentSize = BitConverter.GetBytes(content.Length);
+
+            var msg = new byte[header.Length + content.Length + 8];
+
+            using (var ms = new MemoryStream(msg))
+            {
+                ms.Write(headerSize);
+                ms.Write(contentSize);
+                ms.Write(header);
+                ms.Write(content);
+            }
+
+            return msg;
         }
     }
 }

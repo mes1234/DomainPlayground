@@ -34,15 +34,13 @@ namespace Doomain.Streaming
         }
 
         /// <inheritdoc/>
-        public async Task Publish(Topic topic, byte[] header, byte[] content)
+        public async Task Publish(Topic topic, byte[] msg)
         {
             try
             {
                 using IConnection c = new ConnectionFactory().CreateConnection();
 
                 IJetStream js = c.CreateJetStreamContext();
-
-                byte[] msg = GetMessage(header, content);
 
                 await js.PublishAsync(topic.GetTopic(), msg).ConfigureAwait(false);
             }
@@ -53,22 +51,34 @@ namespace Doomain.Streaming
             }
         }
 
-        private static byte[] GetMessage(byte[] header, byte[] content)
+        /// <inheritdoc/>
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var headerSize = BitConverter.GetBytes(header.Length);
-            var contentSize = BitConverter.GetBytes(content.Length);
-
-            var msg = new byte[header.Length + content.Length + 8];
-
-            using (var ms = new MemoryStream(msg))
+            try
             {
-                ms.Write(headerSize);
-                ms.Write(contentSize);
-                ms.Write(header);
-                ms.Write(content);
-            }
+                using IConnection c = new ConnectionFactory().CreateConnection();
 
-            return msg;
+                var pso = PushSubscribeOptions
+                    .Builder()
+                    .WithDurable("Dummy")
+                    .Build();
+
+                var js = c.CreateJetStreamContext();
+
+                var sub = js.PushSubscribeAsync("generic.addedorupdated", MyHandler, true, pso);
+
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    await Task.Delay(1000).ConfigureAwait(false);
+                }
+
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error occured {ex}", ex.Message);
+                throw;
+            }
         }
 
         private bool RecieveMessage(byte[] msg, out byte[] header, out byte[] content)
@@ -100,43 +110,28 @@ namespace Doomain.Streaming
             }
         }
 
-        /// <inheritdoc/>
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            try
-            {
-                using IConnection c = new ConnectionFactory().CreateConnection();
-
-                var pso = PushSubscribeOptions.Builder().Build();
-
-                var js = c.CreateJetStreamContext();
-
-                var sub = js.PushSubscribeAsync("generic.addedorupdated", MyHandler, true, pso);
-
-                while (!stoppingToken.IsCancellationRequested)
-                {
-                    await Task.Delay(1000).ConfigureAwait(false);
-                }
-
-                return;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error occured {ex}", ex.Message);
-                throw;
-            }
-        }
-
         private void MyHandler(object sender, MsgHandlerEventArgs args)
         {
             if (!RecieveMessage(args.Message.Data, out var header, out var content)) return;
 
-            var topic = Topic.AddOrUpdated;
+            var topic = GetTopic(args.Message.Subject);
+
             foreach (var handler in _handlers.Where(x => x.SupportedTopic == topic))
             {
                 _logger.LogInformation("Handling data for topic {@topic}", topic);
                 handler.Handle(header, content);
             }
+        }
+
+        private Topic GetTopic(string natsSubject)
+        {
+            var subject = natsSubject.Split(".")[1];
+
+            return subject switch
+            {
+                "addedorupdated" => Topic.AddOrUpdated,
+                _ => throw new NotSupportedException($"subject {subject} is not supported"),
+            };
         }
     }
 }

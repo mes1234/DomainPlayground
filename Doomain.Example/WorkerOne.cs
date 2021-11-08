@@ -53,7 +53,7 @@ namespace Doomain.Example
                     m1.SetName("Witek");
                     m1.SetGuid(Guid.Parse("0721c89a-1437-4906-af53-da4d3880da6f"));
                     await _repository.AddOrUpdate(m1);
-                    await Task.Delay(100000000);
+                    await Task.Delay(1000 * 3600);
                 }
                 catch (Exception ex)
                 {
@@ -62,6 +62,4 @@ namespace Doomain.Example
             }
         }
     }
-
-
 }
