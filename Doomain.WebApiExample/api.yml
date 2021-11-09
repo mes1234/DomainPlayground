@@ -1,0 +1,67 @@
+﻿openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Doomain
+  license:
+    name: MIT
+servers:
+  - url: http://127.0.0.1:8080/
+paths:
+  /modela/{userId}:
+    parameters:
+          - name: userId
+            in: path
+            required: true
+            description: id if model
+            schema:
+              type : string
+    get:
+      summary: Returns a model A.
+      description: Returns a model A.
+      responses:
+        '200':    # status code
+          description: A JSON array of models
+          content:
+            application/json:
+              schema: 
+                  $ref: '#/components/schemas/ModelA'
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error
+    post:
+      summary: Add or update model A
+      requestBody:
+        description: User credentials
+        required: true
+        content:
+            application/json:
+              schema: 
+                  $ref: '#/components/schemas/ModelA'
+      responses:
+        '200':    # status code
+          description: OK
+        '500':
+          description: Internal server error
+          
+
+
+components:
+  schemas:
+    ModelA:
+      type: object
+      required:
+        - name
+        - id
+        - revision
+      properties:
+        name:
+          type: string
+          default: "dummy"
+        id:
+          type: string
+          default: "75414b96-9aed-4a78-a956-2085d4e6d14b"
+        revision:
+          type: integer
+          default: 1
+  
