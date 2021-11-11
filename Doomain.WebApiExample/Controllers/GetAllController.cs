@@ -1,3 +1,5 @@
+using AutoMapper;
+using Doomain.Abstraction;
 using Doomain.Example;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -11,6 +13,18 @@ namespace Doomain.WebApiExample.Controllers
 [ApiController]
     public class DefaultApiController : ControllerBase
     {
+        private readonly IMapper _mapper;
+        private readonly IRepository<ModelA> _repository;
+
+        public DefaultApiController(
+            IMapper mapper,
+            IRepository<ModelA> repository)
+        {
+           _mapper = mapper;
+            _repository = repository;
+        }
+
+
         /// <summary>
         /// Returns a model A.
         /// </summary>
@@ -23,20 +37,32 @@ namespace Doomain.WebApiExample.Controllers
         [Route("//modela/{userId}")]
         public virtual IActionResult ModelaUserIdGet([FromRoute][Required] Guid userId)
         {
-        //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-        // return StatusCode(200, default(ModelA));
+            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            // return StatusCode(200, default(ModelA));
 
-        //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-        // return StatusCode(404);
+            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            // return StatusCode(404);
 
-        //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-        // return StatusCode(500);
-         var   exampleJson = "{\n  \"name\" : \"dummy\",\n  \"id\" : \"75414b96-9aed-4a78-a956-2085d4e6d14b\",\n  \"revision\" : 0\n}";
+            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            // return StatusCode(500);
 
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<Modeladto>(exampleJson)
-            : default(Modeladto);            //TODO: Change the data returned
-            return new ObjectResult(example);
+            try
+            {
+                var model = _repository.Get(userId);
+
+                var dto = _mapper.Map<Modeladto>(model);
+
+                var serialized = JsonConvert.SerializeObject(dto);
+                
+                return StatusCode(200, dto);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
         }
 
         /// <summary>
@@ -56,7 +82,16 @@ namespace Doomain.WebApiExample.Controllers
             //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(500);
 
-            throw new NotImplementedException();
+            try
+            {
+                var model = _mapper.Map<ModelA>(body);
+                _repository.AddOrUpdate(model);
+                return StatusCode(200);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

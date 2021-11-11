@@ -1,9 +1,15 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Doomain;
 using Doomain.Example;
+using Doomain.Shared;
 using Doomain.Streaming;
+using Doomain.WebApiExample.Mappings;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using AutoMapper.Contrib.Autofac;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
 
 var builder = WebApplication
     .CreateBuilder(args);
@@ -17,6 +23,7 @@ builder.Host
                     // for you.
                     builder.InstallDoomain();
                     builder.RegisterType<ModelA>();
+                    builder.RegisterAutoMapper(typeof(ModelAProfile).Assembly);
                 });
 
 // Add services to the container.
@@ -26,6 +33,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHostedService<NatsStreaming>();
+
 
 var app = builder.Build();
 
