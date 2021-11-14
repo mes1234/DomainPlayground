@@ -16,7 +16,10 @@ namespace Doomain.Abstraction
     /// Generic repository 
     /// </summary>
     /// <typeparam name="T">Type of items to store</typeparam>
-    public partial class Repository<T> : INotificationHandler<AddOrUpdateNotification>, IRepository<T>
+    public partial class Repository<T> : 
+        INotificationHandler<AddOrUpdateNotification>, 
+        INotificationHandler<RemoveNotification>, 
+        IRepository<T>
          where T : IEvent, IEntity
     {
         private static readonly ConcurrentDictionary<Guid, T> Repo = new();
@@ -74,7 +77,18 @@ namespace Doomain.Abstraction
         /// <param name="id">Id of item</param>
         public async Task TryRemove(Guid id)
         {
-            await _mediator.Publish(new RemoveNotification(id));
+            _logger.LogInformation("Attempt to remove item from repository {id}", id);
+
+         if(   Repo.TryRemove(id, out var item))
+            {
+                await _mediator.Publish(new RemoveNotification(item,Direction.Outbound)).ConfigureAwait(false);
+            }
+         else
+            {
+                throw new KeyNotFoundException($"Item with id {id} is not defined in repository");
+            }
+
+           
         }
 
     }

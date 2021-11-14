@@ -39,6 +39,7 @@ namespace Doomain.EventsDispatcher
                     await _streaming.Publish(Topic.AddOrUpdated, GetMessage(notification.Header, notification.Content)).ConfigureAwait(false);
                     break;
                 case EventTypes.Deleted:
+                    await _streaming.Publish(Topic.Delete, GetMessage(notification.Header, notification.Content)).ConfigureAwait(false);
                     break;
             }
         }

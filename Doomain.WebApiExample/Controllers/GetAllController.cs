@@ -64,6 +64,40 @@ namespace Doomain.WebApiExample.Controllers
 
 
         }
+        /// <summary>
+        /// Deletes a model A.
+        /// </summary>
+        /// <param name="userId">id if model</param>
+        /// <response code="200">A JSON array of models</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Internal server error</response>
+        [HttpDelete]
+        [Route("//modela/{userId}")]
+        public virtual async Task<IActionResult> ModelaUserIdDelete([FromRoute][Required] Guid userId)
+        {
+            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            // return StatusCode(200, default(ModelA));
+
+            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            // return StatusCode(404);
+
+            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            // return StatusCode(500);
+
+            try
+            {
+               await _repository.TryRemove(userId).ConfigureAwait(false); 
+
+                return StatusCode(200, "Removed");
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(404, "Not found");
+            }
+
+
+        }
 
         /// <summary>
         /// Add or update model A

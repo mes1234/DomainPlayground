@@ -24,6 +24,8 @@ namespace Doomain.EventsDispatcher
         {
             builder.RegisterType<AddOrUpdateItemNotificationHandler>()
                 .As<IStreamingHandler>();
+            builder.RegisterType<RemoveItemNotificationHandler>()
+                .As<IStreamingHandler>();
 
             builder.RegisterType<EventBuilder>().As<IEventBuilder>();
         }

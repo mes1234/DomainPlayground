@@ -64,7 +64,7 @@ namespace Doomain.Streaming
 
                 var js = c.CreateJetStreamContext();
 
-                var sub = js.PushSubscribeAsync("generic.addedorupdated", MyHandler, true, pso);
+                var sub = js.PushSubscribeAsync("generic.*", MyHandler, true, pso);
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
@@ -129,6 +129,7 @@ namespace Doomain.Streaming
             return subject switch
             {
                 "addedorupdated" => Topic.AddOrUpdated,
+                "deleted" => Topic.Delete,
                 _ => throw new NotSupportedException($"subject {subject} is not supported"),
             };
         }

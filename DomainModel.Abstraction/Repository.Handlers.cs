@@ -38,6 +38,24 @@ namespace Doomain.Abstraction
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Handles a notification
+        /// </summary>
+        /// <param name="notification">The notification</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        public Task Handle(RemoveNotification notification, CancellationToken cancellationToken)
+        {
+            // Repository should only take care of inbound notification
+            if (notification.Direction == Direction.Outbound) return Task.CompletedTask;
+
+            if (Repo.TryRemove(notification.Item.Id, out _))
+                _logger.LogInformation("Removed item to Repository from external source {@item} in revision {revision}", notification.Item, notification.Item.Revision);
+            else
+                _logger.LogInformation("Item {id} does not exist in repository", notification.Item.Id);
+            return Task.CompletedTask;
+        }
+
 
         /// <summary>
         /// Check if Repository owned revision is not higher than incomming

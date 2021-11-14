@@ -40,7 +40,8 @@ namespace Doomain
             foreach (var modelType in modelTypes)
                 containerBuilder.RegisterType(typeof(Repository<>)
                        .MakeGenericType(modelType))
-                       .As<INotificationHandler<AddOrUpdateNotification>>();
+                       .As<INotificationHandler<AddOrUpdateNotification>>()
+                       .As<INotificationHandler<RemoveNotification>>();
                //        .As(typeof(Repository<>).MakeGenericType(modelType));
         }
 
