@@ -65,10 +65,12 @@ namespace Doomain.EventsDispatcher
         }
 
         /// <inheritdoc/>
-        public async Task<Status> Handle(byte[] header, byte[] content)
+        public async Task<Status> Handle(byte[] data)
         {
             try
             {
+                if (!DataSplitterUtility.RecieveMessage(data, out var header, out var content)) return Status.Nack;
+
                 IEvent obj = _eventBuilder.BuildEvent(header, content);
 
                 _logger.LogInformation("Handling Inbound {@obj} in revision {revision}", obj, obj.Revision);

@@ -68,7 +68,7 @@ namespace Doomain.Streaming
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    await Task.Delay(10000).ConfigureAwait(false);
+                    await Task.Delay(1000).ConfigureAwait(false);
                 }
 
                 return;
@@ -80,45 +80,14 @@ namespace Doomain.Streaming
             }
         }
 
-        private bool RecieveMessage(byte[] msg, out byte[] header, out byte[] content)
-        {
-            try
-            {
-                byte[] buf = new byte[msg.Length];
-
-                using var ms = new MemoryStream(msg);
-
-                ms.Read(buf, 0, 4);
-                var headerSize = BitConverter.ToInt32(buf.AsSpan()[0..4]);
-
-                ms.Read(buf, 0, 4);
-                var contentSize = BitConverter.ToInt32(buf.AsSpan()[0..4]);
-
-                header = new byte[headerSize];
-                content = new byte[contentSize];
-
-                ms.Read(header, 0, headerSize);
-                ms.Read(content, 0, contentSize);
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error occured {ex}", ex.Message);
-                throw;
-            }
-        }
-
         private void MyHandler(object sender, MsgHandlerEventArgs args)
         {
-            if (!RecieveMessage(args.Message.Data, out var header, out var content)) return;
-
             var topic = GetTopic(args.Message.Subject);
 
             foreach (var handler in _handlers.Where(x => x.SupportedTopic == topic))
             {
                 _logger.LogInformation("Handling data for topic {@topic}", topic);
-                handler.Handle(header, content);
+                handler.Handle(args.Message.Data);
             }
         }
 
