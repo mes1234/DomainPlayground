@@ -18,10 +18,11 @@ namespace Doomain.Streaming
     /// </summary>
     public class RedisStreaming : BackgroundService, IStreaming
     {
+        private readonly Guid _id = Guid.NewGuid();
         private static readonly ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect("localhost");
         private readonly IEnumerable<IStreamingHandler> _handlers;
         private readonly ILogger<RedisStreaming> _logger;
-        private readonly ISubscriber _subscriber;
+        private readonly IDatabase _db;
 
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace Doomain.Streaming
         {
             _handlers = handlers;
             _logger = logger;
-            _subscriber = _redis.GetSubscriber();
+            _db = _redis.GetDatabase();
         }
 
         /// <inheritdoc/>
@@ -43,7 +44,7 @@ namespace Doomain.Streaming
         {
             try
             {
-                await _subscriber.PublishAsync(topic.GetTopic(), msg).ConfigureAwait(false);
+                await _db.StreamAddAsync("generic", topic.GetTopic(), msg).ConfigureAwait(false);
             }
             catch (System.Exception ex)
             {
@@ -55,12 +56,20 @@ namespace Doomain.Streaming
         /// <inheritdoc/>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            var msgCounter = "0-0";
             try
             {
-                _subscriber.Subscribe(Topic.AddOrUpdated.GetTopic()).OnMessage(Handler);
+                _db.StreamCreateConsumerGroup("generic", _id.ToString(), StreamPosition.Beginning);
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
+                    var msg = await _db.StreamReadAsync("generic", msgCounter, 1).ConfigureAwait(false);
+                    if (msg.Length != 0)
+                    {
+                        Handle(msg.First());
+                        msgCounter = msg.First().Id;
+                    }
+
                     await Task.Delay(1000).ConfigureAwait(false);
                 }
 
@@ -73,14 +82,14 @@ namespace Doomain.Streaming
             }
         }
 
-        private void Handler(ChannelMessage channelMessage)
+        private void Handle(StreamEntry streamEntry)
         {
-            var topic = GetTopic(channelMessage.SubscriptionChannel);
+            var topic = GetTopic(streamEntry.Values[0].Name);
 
             foreach (var handler in _handlers.Where(x => x.SupportedTopic == topic))
             {
                 _logger.LogInformation("Handling data for topic {@topic}", topic);
-                handler.Handle((byte[])channelMessage.Message.Box());
+                handler.Handle((byte[])streamEntry.Values[0].Value.Box());
             }
         }
 
