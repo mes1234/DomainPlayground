@@ -33,7 +33,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddHostedService<NatsStreaming>();
-builder.Services.AddHostedService<FileStreaming>();
+//builder.Services.AddHostedService<FileStreaming>();
+builder.Services.AddHostedService<RedisStreaming>();
 
 
 var app = builder.Build();
