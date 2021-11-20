@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Shared", "Shared\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Shared.Tests", "Doomain.Shared.Tests\Doomain.Shared.Tests.csproj", "{B286B21B-AB7D-4636-B4CC-43BE2586061B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Example", "Doomain.Example\Doomain.Example.csproj", "{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.Streaming", "Doomain.Streaming\Doomain.Streaming.csproj", "{F720D587-8DE7-441B-9A13-84D3D8012CDD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.EventsDispatcher.Tests", "Doomain.EventsDispatcher.Tests\Doomain.EventsDispatcher.Tests.csproj", "{3353A1EC-A7B7-4C19-9D6A-0AC72FFB5207}"
@@ -28,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain", "Doomain\Doomain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.WebApiExample", "Doomain.WebApiExample\Doomain.WebApiExample.csproj", "{1E3E9C8B-F2A9-49F8-A7CE-C63453D4FD31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doomain.WebApiExample.Tests", "Doomain.WebApiExample.Tests\Doomain.WebApiExample.Tests.csproj", "{8DBF5DBC-2228-4267-A8BF-39B0A0A0974E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.WebApiExample.Tests", "Doomain.WebApiExample.Tests\Doomain.WebApiExample.Tests.csproj", "{8DBF5DBC-2228-4267-A8BF-39B0A0A0974E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +54,6 @@ Global
 		{B286B21B-AB7D-4636-B4CC-43BE2586061B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B286B21B-AB7D-4636-B4CC-43BE2586061B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B286B21B-AB7D-4636-B4CC-43BE2586061B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73B36C92-D0FA-4614-BFAF-52C5DADD6D1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F720D587-8DE7-441B-9A13-84D3D8012CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
