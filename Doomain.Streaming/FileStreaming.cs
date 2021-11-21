@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using Autofac;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NATS.Client;
-using NATS.Client.JetStream;
 
 namespace Doomain.Streaming
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 
 namespace Doomain.Streaming
 {
@@ -18,9 +13,8 @@ namespace Doomain.Streaming
         /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
-            // builder.RegisterType<NatsStreaming>().As<IStreaming>();
-            //builder.RegisterType<FileStreaming>().As<IStreaming>();
             builder.RegisterType<RedisStreaming>().As<IStreaming>();
+            builder.RegisterType<FileStreaming>().As<IStreaming>();
         }
     }
 }

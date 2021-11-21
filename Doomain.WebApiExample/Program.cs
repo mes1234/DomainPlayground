@@ -1,14 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using Doomain;
 using Doomain.Example;
-using Doomain.Shared;
 using Doomain.Streaming;
 using Doomain.WebApiExample.Mappings;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using AutoMapper.Contrib.Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
 
 var builder = WebApplication
@@ -32,9 +27,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddHostedService<NatsStreaming>();
-//builder.Services.AddHostedService<FileStreaming>();
-builder.Services.AddHostedService<RedisStreaming>();
+builder.Services.AddHostedService<FileStreaming>();
+//builder.Services.AddHostedService<RedisStreaming>();
 
 
 var app = builder.Build();

@@ -42,7 +42,6 @@ namespace Doomain
                        .MakeGenericType(modelType))
                        .As<INotificationHandler<AddOrUpdateNotification>>()
                        .As<INotificationHandler<RemoveNotification>>();
-            //        .As(typeof(Repository<>).MakeGenericType(modelType));
         }
 
         private static IEnumerable<Type> GetAllTypesThatImplementInterface()

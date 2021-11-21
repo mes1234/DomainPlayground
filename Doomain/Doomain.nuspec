@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>mes1234.Doomain</id>
+		<version>1.0.0</version>
+		<authors>github.com/mes1234</authors>
+		<projectUrl>https://github.com/mes1234/DomainPlayground</projectUrl>
+		<license type="expression">Apache-2.0</license>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<releaseNotes>First release</releaseNotes>
+		<description>Distributed repository of models</description>
+		<copyright>Copyright ©2021 mes1234</copyright>
+		<tags>event sourcing</tags>
+		<dependencies>
+			<dependency id="Autofac" version="6.2.0" />
+			<dependency id="MediatR" version="9.0.0" />
+			<dependency id="MediatR.Extensions.Autofac.DependencyInjection" version="7.3.0" />
+			<dependency id="Microsoft.Extensions.Logging.Abstractions" version="5.0.0" />
+			<dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="5.0.0" />
+			<dependency id="Microsoft.Extensions.Hosting.Abstractions" version="5.0.0" />
+			<dependency id="StackExchange.Redis" version="2.2.88" />
+		</dependencies>
+	</metadata>
+</package>

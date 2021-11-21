@@ -17,8 +17,4 @@
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Doomain\Doomain.csproj" />
-	</ItemGroup>
-
 </Project>
