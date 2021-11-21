@@ -17,7 +17,7 @@ namespace Doomain
     /// <summary>
     /// Support for installation
     /// </summary>
-   public static class Installation
+    public static class Installation
     {
         /// <summary>
         /// Install doomain in autofac container
@@ -42,7 +42,7 @@ namespace Doomain
                        .MakeGenericType(modelType))
                        .As<INotificationHandler<AddOrUpdateNotification>>()
                        .As<INotificationHandler<RemoveNotification>>();
-               //        .As(typeof(Repository<>).MakeGenericType(modelType));
+            //        .As(typeof(Repository<>).MakeGenericType(modelType));
         }
 
         private static IEnumerable<Type> GetAllTypesThatImplementInterface()
@@ -51,7 +51,7 @@ namespace Doomain
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (var assembly in assemblies)
-                types.AddRange( assembly.GetTypes().Where(Check));
+                types.AddRange(assembly.GetTypes().Where(Check));
 
             return types;
         }
