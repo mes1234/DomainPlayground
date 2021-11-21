@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace Doomain.Streaming
 {
@@ -13,8 +15,15 @@ namespace Doomain.Streaming
         /// <param name="builder">builder</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<RedisStreaming>().As<IStreaming>();
-            builder.RegisterType<FileStreaming>().As<IStreaming>();
+            switch (StreamingConfig.Mode)
+            {
+                case "File":
+                    builder.RegisterType<FileStreaming>().As<IStreaming>();
+                    break;
+                case "Redis":
+                    builder.RegisterType<RedisStreaming>().As<IStreaming>();
+                    break;
+            }
         }
     }
 }

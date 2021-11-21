@@ -12,9 +12,11 @@
 		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="5.4.0" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="mes1234.Doomain" Version="1.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
 	</ItemGroup>
 
 </Project>
