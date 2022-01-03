@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		publish.bat = publish.bat
 		rules.ruleset = rules.ruleset
+		sonarscan.bat = sonarscan.bat
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doomain.EventsDispatcher", "EventsDispatcher\Doomain.EventsDispatcher.csproj", "{6738B14D-12CF-4A22-AA46-2A35C3A70D95}"
